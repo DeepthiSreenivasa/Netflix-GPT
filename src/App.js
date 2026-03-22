@@ -1,4 +1,12 @@
+import Body from "./components/Body";
+import Header from "./components/Header";
+
 const App = () => {
-  return <><div className="bg-black text-white text-5xl p-10" >Test React with Tailwind</div></>
-}
+  return (
+    <>
+      <Header></Header>
+      <Body />
+    </>
+  );
+};
 export default App;
