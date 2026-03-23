@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import formValidator from "../utils/validator";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const nameRef = useRef(null);
+
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const toggleSignIn = () => {
     setIsSignInForm(!isSignInForm);
+  };
+
+  const validateFormFields = () => {
+    let message = formValidator(
+      emailRef.current.value,
+      passwordRef.current.value,
+      nameRef.current.value
+    );
+    setErrorMessage(message);
   };
 
   return (
@@ -26,6 +41,7 @@ const Login = () => {
               className="rounded px-4 py-3"
               type="text"
               placeholder="Full Name"
+              ref={nameRef}
             ></input>
           )}
 
@@ -33,13 +49,22 @@ const Login = () => {
             className="rounded px-4 py-3"
             type="text"
             placeholder="Email"
+            ref={emailRef}
           ></input>
           <input
             className="rounded px-4 py-3"
             type="password"
             placeholder="Password"
+            ref={passwordRef}
           ></input>
-          <button className="rounded bg-red-600 px-4 py-3">
+          <p className="text-red-700">{errorMessage}</p>
+          <button
+            className="rounded bg-red-600 px-4 py-3"
+            onClick={(e) => {
+              e.preventDefault();
+              validateFormFields();
+            }}
+          >
             {isSignInForm ? "Sign In" : "Sign Up"}
           </button>
           <p className="text-white">
