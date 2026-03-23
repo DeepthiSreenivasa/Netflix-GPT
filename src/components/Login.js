@@ -39,7 +39,9 @@ const Login = () => {
             type="password"
             placeholder="Password"
           ></input>
-          <button className="rounded bg-red-600 px-4 py-3">Sign In</button>
+          <button className="rounded bg-red-600 px-4 py-3">
+            {isSignInForm ? "Sign In" : "Sign Up"}
+          </button>
           <p className="text-white">
             {isSignInForm ? "Do not have an account ?" : "Already a member?"}{" "}
             <span
