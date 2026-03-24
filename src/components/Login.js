@@ -15,9 +15,9 @@ const Login = () => {
 
   const validateFormFields = () => {
     let message = formValidator(
-      emailRef.current.value,
-      passwordRef.current.value,
-      nameRef.current.value
+      emailRef?.current?.value,
+      passwordRef?.current?.value,
+      isSignInForm ? undefined : nameRef?.current?.value,
     );
     setErrorMessage(message);
   };
