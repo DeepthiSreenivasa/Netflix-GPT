@@ -5,11 +5,11 @@ import Browse from "./Browse";
 const Body = () => {
   const appRoutes = createBrowserRouter([
     {
-      path: "login",
+      path: "/login",
       element: <Login></Login>,
     },
     {
-      path: "browse",
+      path: "/browse",
       element: <Browse></Browse>,
     }
   ]);

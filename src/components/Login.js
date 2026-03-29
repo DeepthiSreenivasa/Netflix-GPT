@@ -1,13 +1,21 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import formValidator from "../utils/validator";
+import signUpApi from "../utils/firebaseSignUpValidator";
+import signInWithEmailAndPassword from "../utils/firebaseSignedInValidator";
+import { auth } from "../utils/firebase";
+
+//import createUserWithEmailAndPassword from "../utils/firebaseAuthentication";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const nameRef = useRef(null);
-
-  const [errorMessage, setErrorMessage] = useState(null);
 
   const toggleSignIn = () => {
     setIsSignInForm(!isSignInForm);
@@ -20,6 +28,18 @@ const Login = () => {
       isSignInForm ? undefined : nameRef?.current?.value,
     );
     setErrorMessage(message);
+
+    if (message) return;
+
+    if (isSignInForm) {
+      //Sign In
+      signInWithEmailAndPassword(auth, emailRef?.current?.value, passwordRef?.current?.value);
+      navigate("/browse");
+    } else {
+      console.log("Into Sign Up Call");
+      signUpApi(auth, emailRef?.current?.value, passwordRef?.current?.value);
+      navigate("/login");
+    }
   };
 
   return (
