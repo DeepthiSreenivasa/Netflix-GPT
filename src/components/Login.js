@@ -5,6 +5,8 @@ import formValidator from "../utils/validator";
 import signUpApi from "../utils/firebaseSignUpValidator";
 import signInWithEmailAndPassword from "../utils/firebaseSignedInValidator";
 import { auth } from "../utils/firebase";
+import { useDispatch } from "react-redux";
+import { storeUser } from "../store/userSlice";
 
 //import createUserWithEmailAndPassword from "../utils/firebaseAuthentication";
 
@@ -12,6 +14,7 @@ const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -21,8 +24,8 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
 
-  const validateFormFields = () => {
-    let message = formValidator(
+  const validateFormFields = async () => {
+    const message = formValidator(
       emailRef?.current?.value,
       passwordRef?.current?.value,
       isSignInForm ? undefined : nameRef?.current?.value,
@@ -31,14 +34,26 @@ const Login = () => {
 
     if (message) return;
 
-    if (isSignInForm) {
-      //Sign In
-      signInWithEmailAndPassword(auth, emailRef?.current?.value, passwordRef?.current?.value);
-      navigate("/browse");
-    } else {
-      console.log("Into Sign Up Call");
-      signUpApi(auth, emailRef?.current?.value, passwordRef?.current?.value);
-      navigate("/login");
+    try {
+      if (isSignInForm) {
+        const user = await signInWithEmailAndPassword(
+          auth,
+          emailRef?.current?.value,
+          passwordRef?.current?.value,
+        );
+        dispatch(storeUser(user));
+        navigate("/browse");
+      } else {
+        await signUpApi(
+          auth,
+          emailRef?.current?.value,
+          passwordRef?.current?.value,
+        );
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log("Error::", error);
+      setErrorMessage(`${error.code}: ${error.message}`);
     }
   };
 
