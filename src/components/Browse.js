@@ -1,5 +1,5 @@
 const Browse = () =>{
-    return <><div>Browse Component</div></>
+    return <><div className="bg-black h-screen" >Browse Component</div></>
 }
 
 export default Browse
