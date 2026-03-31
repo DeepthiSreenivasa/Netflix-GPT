@@ -57,6 +57,11 @@ const Login = () => {
     }
   };
 
+  const clearFields = () => {
+      emailRef.current.value = "";
+      passwordRef.current.value = "";
+  };
+
   return (
     <div className="relative min-h-screen">
       <img
@@ -106,7 +111,10 @@ const Login = () => {
             {isSignInForm ? "Do not have an account ?" : "Already a member?"}{" "}
             <span
               className="cursor-pointer hover:text-red-600"
-              onClick={toggleSignIn}
+              onClick={(e) => {
+                toggleSignIn();
+                clearFields();
+              }}
             >
               {isSignInForm ? "Sign Up" : "Sign In"}
             </span>
