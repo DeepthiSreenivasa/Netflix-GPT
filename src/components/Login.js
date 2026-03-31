@@ -6,9 +6,7 @@ import signUpApi from "../utils/firebaseSignUpValidator";
 import signInWithEmailAndPassword from "../utils/firebaseSignedInValidator";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
-import { storeUser } from "../store/userSlice";
 
-//import createUserWithEmailAndPassword from "../utils/firebaseAuthentication";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -41,7 +39,6 @@ const Login = () => {
           emailRef?.current?.value,
           passwordRef?.current?.value,
         );
-        dispatch(storeUser(user));
         navigate("/browse");
       } else {
         await signUpApi(
@@ -49,7 +46,6 @@ const Login = () => {
           emailRef?.current?.value,
           passwordRef?.current?.value,
         );
-        navigate("/login");
       }
     } catch (error) {
       console.log("Error::", error);
