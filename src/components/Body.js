@@ -3,6 +3,7 @@ import {
   createBrowserRouter,
   Outlet,
   useNavigate,
+  Navigate,
 } from "react-router-dom";
 import Login from "./Login";
 import Browse from "./Browse";
@@ -54,8 +55,9 @@ const Body = () => {
   const appRoutes = createBrowserRouter([
     {
       path: "/",
-      element: <AppLayout />,
+      element: <AppLayout/>,
       children: [
+        { index: true, element: <Navigate to="/login" replace /> },
         { path: "login", element: <Login /> },
         { path: "browse", element: <Browse /> },
       ],
