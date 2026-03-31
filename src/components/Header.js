@@ -1,19 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
-import { removeUser } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
+import logOutApi from "../utils/firebaseSignOut";
+import { auth } from "../utils/firebase";
 
 const Header = () => {
   const userDetails = useSelector((store) => store.user);
   const isLoggedIn = Object.keys(userDetails).length > 0;
   console.log("isLoggedIn::", isLoggedIn);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const handleLogOut = () => {
     console.log("userDetails::", userDetails);
-    dispatch(removeUser());
-    navigate("/login");
+    logOutApi(auth)
   };
 
   return (
