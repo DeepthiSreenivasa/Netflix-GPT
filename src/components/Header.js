@@ -8,9 +8,6 @@ const Header = () => {
   const isLoggedIn = Object.keys(userDetails).length > 0;
   console.log("isLoggedIn::", isLoggedIn);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const handleLogOut = () => {
     console.log("userDetails::", userDetails);
     logOutApi(auth)

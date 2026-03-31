@@ -11,8 +11,6 @@ import { useDispatch } from "react-redux";
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -39,7 +37,6 @@ const Login = () => {
           emailRef?.current?.value,
           passwordRef?.current?.value,
         );
-        navigate("/browse");
       } else {
         await signUpApi(
           auth,
