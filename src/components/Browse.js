@@ -1,5 +1,13 @@
-const Browse = () =>{
-    return <><div className="bg-black h-screen" >Browse Component</div></>
-}
+import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
 
-export default Browse
+const Browse = () => {
+  return (
+    <>
+      <MainContainer></MainContainer>
+      <SecondaryContainer></SecondaryContainer>
+    </>
+  );
+};
+
+export default Browse;
