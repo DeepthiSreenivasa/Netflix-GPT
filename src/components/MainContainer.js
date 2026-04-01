@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import useNowPlaying from "../hooks/useNowPlaying";
+import useNowPlaying from "../hooks/useNowPlayingMovies";
 
-import useTopVideoOfNowPlayingVideo from "../hooks/useTopVideoOfNowPlayingVideo";
+import useTopVideoOfNowPlayingMovies from "../hooks/useTopVideoOfNowPlayingMovies";
 
 const MainContainer = () => {
   useNowPlaying();
-  useTopVideoOfNowPlayingVideo();
+  useTopVideoOfNowPlayingMovies();
 
   const youtubeKey = useSelector(
     (store) => store?.movies?.topVideoOfNowPlayingList?.[0]?.key,
