@@ -24,7 +24,6 @@ const AppLayout = () => {
     //how does auth state get changed, whenever we have firebase SignIn, SignUp API that gets called
 
     onAuthStateChanged(auth, (user) => {
-      console.log("Into onAuth State Changed");
       if (user) {
         const { displayName, uid, email, photoURL } = user;
         dispatch(

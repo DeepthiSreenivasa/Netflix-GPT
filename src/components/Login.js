@@ -5,7 +5,6 @@ import formValidator from "../utils/validator";
 import signUpApi from "../utils/firebaseSignUpValidator";
 import signInWithEmailAndPassword from "../utils/firebaseSignedInValidator";
 import { auth } from "../utils/firebase";
-import { useDispatch } from "react-redux";
 
 
 const Login = () => {
@@ -45,7 +44,6 @@ const Login = () => {
         );
       }
     } catch (error) {
-      console.log("Error::", error);
       setErrorMessage(`${error.code}: ${error.message}`);
     }
   };

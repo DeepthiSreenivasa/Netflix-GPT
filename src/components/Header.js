@@ -6,10 +6,8 @@ import { auth } from "../utils/firebase";
 const Header = () => {
   const userDetails = useSelector((store) => store.user);
   const isLoggedIn = Object.keys(userDetails).length > 0;
-  console.log("isLoggedIn::", isLoggedIn);
 
   const handleLogOut = () => {
-    console.log("userDetails::", userDetails);
     logOutApi(auth)
   };
 
