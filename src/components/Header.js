@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import logOutApi from "../utils/firebaseSignOut";
 import { auth } from "../utils/firebase";
 import { toggleGPTSearch } from "../store/gptSlice";
+import { setLanguage } from "../store/appConfigSlice";
 
 const Header = () => {
   const userDetails = useSelector((store) => store.user);
   const isLoggedIn = Object.keys(userDetails).length > 0;
   const gptSearch = useSelector((store) => store.gpt.gptSearch);
+  const appLanguage = useSelector((store) => store.appConfig.appLanguage);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,6 +20,10 @@ const Header = () => {
   const handleMoviesGPTClick = () => {
     dispatch(toggleGPTSearch());
     navigate(gptSearch ? "/moviesGPT" : "/browse");
+  };
+
+  const handleOnLanguageChange = (e) => {
+    dispatch(setLanguage(e.target.value));
   };
 
   return (
@@ -33,15 +39,31 @@ const Header = () => {
             <div className="text-white">
               {userDetails?.email ? `Hello ${userDetails.email}` : ""}
             </div>
-            <div>
-               <button
+            <div className="grid grid-cols-3 gap-2">
+              {gptSearch ? (
+                <div className="rounded px-4 py-2 text-sm font-medium">
+                  Language
+                </div>
+              ) : (
+                <select
+                  className="rounded bg-purple-600 px-4 py-2 text-sm font-medium text-white"
+                  value={appLanguage}
+                  onChange={handleOnLanguageChange}
+                >
+                  <option value="en">English</option>
+                  <option value="kn">ಕನ್ನಡ</option>
+                </select>
+              )}
+
+              <button
                 className="rounded bg-purple-600 px-4 py-2 text-sm font-medium text-white"
                 onClick={handleMoviesGPTClick}
               >
                 {gptSearch ? "Movies GPT" : "Watch Movies"}
               </button>
+
               <button
-                className="rounded bg-red-600 px-4 py-2 text-sm ml-4 font-medium text-white"
+                className="rounded bg-red-600 px-4 py-2 text-sm font-medium text-white"
                 onClick={handleLogOut}
               >
                 Logout
