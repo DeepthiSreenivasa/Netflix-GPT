@@ -4,6 +4,7 @@ import useNowPlaying from "../hooks/useNowPlayingMovies";
 import useTopVideoOfNowPlayingMovies from "../hooks/useTopVideoOfNowPlayingMovies";
 
 const MainContainer = () => {
+  console.log("Main contianer")
   useNowPlaying();
   useTopVideoOfNowPlayingMovies();
 

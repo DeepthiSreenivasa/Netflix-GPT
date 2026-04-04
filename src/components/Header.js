@@ -2,13 +2,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import logOutApi from "../utils/firebaseSignOut";
 import { auth } from "../utils/firebase";
+import { toggleGPTSearch } from "../store/gptSlice";
 
 const Header = () => {
   const userDetails = useSelector((store) => store.user);
   const isLoggedIn = Object.keys(userDetails).length > 0;
+  const gptSearch = useSelector((store) => store.gpt.gptSearch);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
-    logOutApi(auth)
+    logOutApi(auth);
+  };
+
+  const handleMoviesGPTClick = () => {
+    dispatch(toggleGPTSearch());
+    navigate(gptSearch ? "/moviesGPT" : "/browse");
   };
 
   return (
@@ -25,8 +34,14 @@ const Header = () => {
               {userDetails?.email ? `Hello ${userDetails.email}` : ""}
             </div>
             <div>
+               <button
+                className="rounded bg-purple-600 px-4 py-2 text-sm font-medium text-white"
+                onClick={handleMoviesGPTClick}
+              >
+                {gptSearch ? "Movies GPT" : "Watch Movies"}
+              </button>
               <button
-                className="rounded bg-red-600 px-4 py-2 text-sm font-medium text-white"
+                className="rounded bg-red-600 px-4 py-2 text-sm ml-4 font-medium text-white"
                 onClick={handleLogOut}
               >
                 Logout

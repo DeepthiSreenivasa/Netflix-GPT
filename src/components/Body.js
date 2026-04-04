@@ -11,18 +11,17 @@ import Header from "./Header";
 import { useEffect } from "react";
 import { auth } from "../utils/firebase";
 import { removeUser, storeUser } from "../store/userSlice";
-import { onAuthStateChanged } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { onAuthStateChanged, beforeAuthStateChanged } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
+import Gpt from "./Gpt";
+
 
 const AppLayout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-
-    //executes when state of authentication of app changes -> login -> logout
-    //how does auth state get changed, whenever we have firebase SignIn, SignUp API that gets called
-
+    // Initial auth check - runs once at setup, only navigates on first load or actual logout
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const { displayName, uid, email, photoURL } = user;
@@ -59,6 +58,7 @@ const Body = () => {
         { index: true, element: <Navigate to="/login" replace /> },
         { path: "login", element: <Login /> },
         { path: "browse", element: <Browse /> },
+        { path: "moviesGPT",element: <Gpt/>}
       ],
     },
   ]);
