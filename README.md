@@ -18,3 +18,10 @@
 - BugFix: If the user is not logged in Redirect /browse to Login Page and vice-versa 
 - *Hygiene: Practice:Unsubscribe on onAuthStateChange*
 - *Hygiene: use constants for URLS*
+- Added TMDB APIs
+- Created Main Container for Trailer
+- Created Seconadry container for carousels
+- Store creates to hold all the movie data
+- Created a GPT search Page - START 
+- Navigate to that page with a button
+- Add Multi lingual feature to the GPT PAge
