@@ -8,11 +8,11 @@ import MovieCard from "./MovieCard";
 
 const Gpt = () => {
   const appLanguage = useSelector((store) => store.appConfig?.appLanguage);
-  const searchedMovies = useSelector(
-    (store) => store.gpt?.searchResults,
-  );
+  const searchedMovies = useSelector((store) => store.gpt?.searchResults);
 
-  const getMovieDetailsData = useGetMovieDetailsResults();
+  const [movieName, setMovieName] = useState("");
+
+  const getMovieDetailsData = useGetMovieDetailsResults(movieName);
 
   const client = new OpenAI({
     apiKey: options.openApiKey,
@@ -30,6 +30,9 @@ const Gpt = () => {
         <input
           type="text"
           placeholder={language[appLanguage].inputPlaceHolder}
+          onChange={(e) => {
+            setMovieName(e.target.value);
+          }}
           className="w-full rounded-md border border-zinc-700 bg-zinc-900 px-4 py-3 text-white outline-none placeholder:text-zinc-400 focus:border-red-500"
         />
         <button
@@ -42,7 +45,6 @@ const Gpt = () => {
         >
           {language[appLanguage].searchButtonLabel}
         </button>
-
       </form>
 
       {searchedMovies && (
@@ -54,7 +56,7 @@ const Gpt = () => {
                 title={index === 0 ? "Your Search Results" : undefined}
                 data={movie.results}
               />
-            ) : null
+            ) : null,
           )}
         </div>
       )}

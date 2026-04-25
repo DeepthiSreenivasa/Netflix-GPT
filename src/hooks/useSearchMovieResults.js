@@ -3,10 +3,14 @@ import { options } from "../constants";
 import { searchResults } from "../store/gptSlice";
 
 
-const useGetMovieDetailsResults = () => {
+            
+const useGetMovieDetailsResults = (movieName) => {
+
+  console.log(movieName)
+
   const dispatch = useDispatch();
 
-  const movieNames = ["Vishnuvardhana", "Ranna", "Kiccha"];
+  const movieNames = [movieName];
 
   const getMovieDetailsData = async () => {
     const movieDetailsData = await Promise.all(
