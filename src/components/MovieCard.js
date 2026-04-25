@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import useNowPlaying from "../hooks/useNowPlayingMovies";
 
 const MovieCard = ({ title, data }) => {
   return (
     <div className="text-xl">
-      <h1 className="mb-4 mt-4 px-2">{title}</h1>
+      <h1 className="mb-4 mt-4 px-2">{ title ? title : " "}</h1>
 
-      <div className="flex overflow-x-scroll">
+      <div className="flex overflow-x-scroll scroll-smooth [&::-webkit-scrollbar]:hidden" style={{ scrollSnapType: "x mandatory" }}>
         {data?.map((item) => (
           <img
-            className="px-3"
+            className="shrink-0 px-3"
             key={item.id}
+            style={{ scrollSnapAlign: "start" }}
             src={"https://image.tmdb.org/t/p/w300/" + item.backdrop_path}
           ></img>
         ))}

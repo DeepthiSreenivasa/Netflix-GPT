@@ -22,6 +22,6 @@
 - Created Main Container for Trailer
 - Created Seconadry container for carousels
 - Store creates to hold all the movie data
-- Created a GPT search Page - START 
+- Created a GPT search Page  
 - Navigate to that page with a button
 - Add Multi lingual feature to the GPT PAge
