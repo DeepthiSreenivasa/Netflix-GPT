@@ -1,9 +1,8 @@
 export const options = {
   headers: {
     Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MmNmZmQ0NjQ5YjIzMzVjYjJkOTU3N2YzZmZmNzNhYSIsIm5iZiI6MTc3NTAzMDQ0MS43ODcwMDAyLCJzdWIiOiI2OWNjZDBhOTc5YmFjZDRiZTM1NTBlZWUiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.jmMVni1n693_4xfPDjDEUl76SMeg09gtYC2ZrFJp9yQ",
+      "Bearer " + process.env.REACT_APP_TMDB_TOKEN,
     accept: "application/json",
   },
-  openApiKey:
-    "REDACTED_OPENAI_KEY",
+  openApiKey: process.env.REACT_APP_OPENAI_KEY,
 };

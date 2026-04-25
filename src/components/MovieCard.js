@@ -8,10 +8,10 @@ const MovieCard = ({ title, data }) => {
       <div className="flex overflow-x-scroll scroll-smooth [&::-webkit-scrollbar]:hidden" style={{ scrollSnapType: "x mandatory" }}>
         {data?.map((item) => (
           <img
-            className="shrink-0 px-3"
+            className="shrink-0 h-auto px-3"
             key={item.id}
             style={{ scrollSnapAlign: "start" }}
-            src={"https://image.tmdb.org/t/p/w300/" + item.backdrop_path}
+            src={"https://image.tmdb.org/t/p/w300/" + (item.backdrop_path || item.poster_path)}
           ></img>
         ))}
       </div>

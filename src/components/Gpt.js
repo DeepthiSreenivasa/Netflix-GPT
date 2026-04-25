@@ -46,17 +46,16 @@ const Gpt = () => {
       </form>
 
       {searchedMovies && (
-        <div className="mt-6 w-full  text-white">
-          <MovieCard
-            title={"Your Search Results"}
-            data={searchedMovies[0].results}
-          ></MovieCard>
-          <MovieCard
-            data={searchedMovies[1].results}
-          ></MovieCard>
-          <MovieCard
-            data={searchedMovies[2].results}
-          ></MovieCard>
+        <div className="mt-6 w-full text-white">
+          {searchedMovies.map((movie, index) =>
+            movie?.results?.length > 0 ? (
+              <MovieCard
+                key={index}
+                title={index === 0 ? "Your Search Results" : undefined}
+                data={movie.results}
+              />
+            ) : null
+          )}
         </div>
       )}
     </div>

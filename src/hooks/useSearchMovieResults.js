@@ -6,7 +6,7 @@ import { searchResults } from "../store/gptSlice";
 const useGetMovieDetailsResults = () => {
   const dispatch = useDispatch();
 
-  const movieNames = ["Fight Club", "Transformer", "Annabelle"];
+  const movieNames = ["Vishnuvardhana", "Ranna", "Kiccha"];
 
   const getMovieDetailsData = async () => {
     const movieDetailsData = await Promise.all(
